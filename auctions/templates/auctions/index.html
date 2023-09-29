@@ -1,0 +1,42 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    {% if title %}
+        <h2>{{ title }}</h2>
+    {% else %}
+        {% if titleCategory %}
+            <h2> Active Category Listings: {{ titleCategory.name }}</h2>
+        {% else %}
+        <h2>Active Listings</h2>
+        {% endif %}
+    {% endif %}
+
+ 
+    {% for auction in auctions %}
+            <div class="card mb-3">
+                <div class="auctionCard">
+                    {% if auction.imageUrl %}
+                            <img src="{{ auction.imageUrl }}" class="auctionImg" alt="{{ auction.title }} photo" >
+                    {% endif %}
+                    <div>
+                        <a href="{% url 'viewAuction' auction.id %}" class="auctionText">{{ auction.title }}</a>
+                        <p><strong>{{ auction.price }}</strong></p>
+                        <p>{{ auction.description }}</p>
+                        <p><small class="text-muted auctionText">Create {{ auction.auction_date }}</small></p>
+                    </div>
+                </div>
+            </div>
+        
+            {% empty %}
+                    <ul>
+                    {% if title == 'Watchlist' %}
+                        <li>You haven't added any listings to your watchlist yet.</li>
+                    {% else %}
+                        <li>No Listing Active.</li>
+                    </ul>
+            {% endif %}
+        
+    {% endfor %}
+        
+{% endblock %}

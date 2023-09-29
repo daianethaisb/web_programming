@@ -1,0 +1,126 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+    <div class="align-container">   
+        <a href="{% url 'index' %}" style="margin-left: 10px;">Back to Auction Listings</a>
+        {% if user.is_authenticated %}
+            {% if auction.isActive %}
+                <form action="{% url 'watchlist' %}" method="POST">
+                    {% csrf_token %}
+                    {% if on_watchlist %}
+                        <input type="submit" class="btn btn-danger" value="Remove from watchlist">
+                        <input type="hidden" name="on_watchlist" value="True">
+                    {% else %}
+                        <input type="submit" class="btn btn-success" value="Add to watchlist">
+                        <input type="hidden" name="on_watchlist" value="False">
+                    {% endif %}
+
+                    <input type="hidden" name="auction_id" value="{{ auction.id }}">
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    {% if message %}
+        {% if statusMessage == "success" %}
+            <div class="alert alert-success" role="alert" style="margin-top: 8px !important; margin-bottom: 0 !important;">
+                {{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert" style="margin-top: 8px !important; margin-bottom: 0 !important;">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <div class="card mb-3" style="border: none;">
+
+        <div class="card-body">
+            <h1 class="card-title">Listing: {{ auction.title }}</h1>
+        </div>
+        
+        {% if auction.imageUrl %}
+            <div class="cardImage">
+                <img src="{{ auction.imageUrl }}" class="card-img-top" alt="{{ auction.title }} photo">
+            </div>
+        {% endif %}
+
+        <div class="card-body">
+
+            <p class="card-text">{{ auction.description }}</p>
+            <div>Current Price <strong>{{auction.price}} $ </strong></div>
+            <p><small class="text-muted auctionText" style="margin-top: 2px;">Last move in {{ auction.buy_date }}</small></p>
+
+            {% if user.is_authenticated %}
+                {% if auction.isActive == True %}
+                    {% if user.id != auction.seller.id %}
+                        <br><form action="{% url 'bid' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    {{ bid_form }}
+                                </div>
+                                <input type="submit" value="Place Bid" class="btn btn-primary  ">
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <input type="hidden" name="auction_id" value="{{ auction.id }}">
+                            </div>
+                        </form><br>
+                    {% else %}
+                        <br><form action="{% url 'closeAuction' auction.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Close auction" name="close_auction">
+                        </form><br>
+                    {% endif %}
+                {% else %}
+                        {% if auction.buyer.id == user.id %}
+                            <br><h5><strong style="color: aliceblue; background-color: green; border-radius: 5px;">
+                                Congratulations!! Your bid was the winner of this auction.</strong></h5><br>
+                        {% else %}
+                            <br><h5>This auction is closed. Purchased by: <strong>{{ auction.buyer.username }}</strong></h5><br>
+                        {% endif %}
+                {% endif %}
+            {% endif %}
+
+            <div>
+                <h4 class="card-title">Details</h4>
+                <ul>
+                    <li >Listed by: <strong>{{ auction.seller.username }}</strong></li>
+                    <li>Category: {{ auction.category }} </li>
+                </ul>
+                <div>Published in: {{ auction.auction_date }}</div><br>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Comments</h4>
+                    <p class="card-text">
+                        <div class="mb-4">
+                            {% for comment in comments %}
+                                <div class="mb-3">
+                                    <em><div><strong>{{ comment.author.username }}</strong> wrote:</div></em>
+                                    <div>{{ comment.comment }}</div>
+                                    <small>{{ comment.comment_date }}</small>
+                                </div>
+                            {% empty %}
+                                <div>No comments yet</div>
+                            {% endfor %}
+                        </div>
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'comment' auction_id=auction.id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="mb-2">
+                                    {{ comment_form }}
+                                </div>
+                                <input type="submit" value="Comment" class="btn btn-primary btn-new-blue" style="float: right;">
+                            </form>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+   
+{% endblock %}

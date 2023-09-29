@@ -1,0 +1,43 @@
+body {
+    padding: 10px;
+}
+
+.align-container{
+    text-align: right !important;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.cardImage{
+    display: flex;
+    justify-content: center;
+}
+
+.cardImage img{
+    max-height: 52vh !important;
+    max-width: 56vh !important;
+}
+
+.auctionCard img {
+    width: 220px;
+    height: 200px;
+    float: left;
+    margin: 0 1rem 15px 0;
+    margin-left: 10px;
+}
+  
+.auctionCard a{
+    margin: 0 0 0.5rem 0;
+}
+
+.auctionCard {
+    display: grid;
+    grid-template-columns: 280px 2fr 280px;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.error-container{
+    font-weight: bold;
+    margin: 20px;
+}
