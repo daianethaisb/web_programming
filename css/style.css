@@ -1,0 +1,96 @@
+body{
+    background-color: white;
+}
+
+a{
+    text-decoration: none;
+    font-family: Arial;
+    font-size: 14px;
+    color: black;
+    margin: 12px;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.imgGoogle{
+    background-image: url("../image/img_Google.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh;
+    margin-top: 6%;
+}
+
+.imgGoogleSearch{
+    background-image: url("../image/img_GoogleSearch.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh;
+    margin-top: 6%;
+}
+
+.align-container{
+    text-align: right !important;
+}
+
+form{
+    text-align: center;
+}
+
+.searchTextField{
+    width: 40%;
+    height: 5vh;
+    border-radius: 30px;
+    border-style: solid;
+    border-color: rgb(235, 232, 228);
+    text-align: left;
+    padding-left: 15px;
+}
+
+.searchButton{
+    font-family: Arial;
+    font-size: 14px;
+    color: black;
+    margin: 10px;
+    border-style: none;
+    background-color: white;
+    width: 150px;
+    height: 30px;
+}
+
+.searchButton:hover{
+    border-radius: 12px;
+    border-style: solid;
+    border-color: rgb(203, 202, 200);
+}
+
+.searchFormContainer {
+    text-align: left !important;
+    display: grid;
+    padding: 20px;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-template-columns: 200px 200px auto;
+    margin-top: 20px;
+}
+
+.textInf{
+    font-family: Arial;
+    font-size: 10px;
+    text-align: left;
+    margin-top: auto;
+}
+
+#advSearchButton{
+    font-family: Arial;
+    font-size: 14px;
+    color: white;
+    border: none;
+    background-color: rgb(29, 126, 237);
+    width: 140px;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 8px;
+    margin-left: 140% !important;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Advanced Search</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="align-container">
+        <a href="../index.html">Back to Google Search</a>
+    </div>
+
+    <h4 style="color: red;">Advanced Search</h4>
+
+    <form action="https://www.google.com/search">
+
+        <div class="searchFormContainer">
+
+            <label style="font-family: Arial; margin-bottom: 20px;">Find pages with...</label>
+            <input type="text" style="border: none;">
+            <label style="font-family: Arial; margin-bottom: 20px;">Do this in the search box.</label>
+
+            <label for="allWords">All these words:</label>
+            <input type="text" id="allWords" name="as_q">
+            <label class="textInf">Enter the important words: rat terrier tricolor</label>
+
+            <label for="exactWords">This exact word or phrase:</label>
+            <input type="text" id="exactWords" name="as_epq">
+            <label class="textInf">Put exact words in quotes: "rat terrier"</label>
+
+            <label for="anyWords">Any of these words:</label>
+            <input type="text" id="anyWords" name="as_oq">
+            <label class="textInf">Type OR between all the words you search for: default OR miniature</label>
+            
+            <label for="noneWords">None of these words:</label>
+            <input type="text" id="noneWords" name="as_eq">
+            <label class="textInf">Put a minus sign before the words you don't want: -rodent, -"Jack Russell"</label>
+            
+            <input type="submit" value="Advanced Search" id="advSearchButton">
+        </div>
+        
+        
+    </form>
+</body>
+</html>
